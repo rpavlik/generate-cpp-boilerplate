@@ -129,7 +129,7 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 	);
 
 	if (array_key_exists('licenselines', $params)) {
-		$licenseraw = $params['licenselines'];
+		$licenseraw = '[LICENSE]' . $params['licenselines'] . '[LICENSE]';
 	} else {
 		$licenseraw = $defaultLicense;
 	}
