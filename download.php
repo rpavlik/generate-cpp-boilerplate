@@ -12,5 +12,10 @@ $filebase = sanitizeFilenamePart($_GET['filebase']);
 ?> 
 and successfully sanitized.
 <?php
-generateBoilerplate($ext, $filebase, $defaultAuthor, $defaultLicense);
+echo $ext;
+echo $filebase;
 ?>
+<?php
+generateBoilerplate(array('ext' => $ext,'filebase' => $filebase));
+?>
+done with the whole thing

@@ -15,6 +15,10 @@ This is a command-line driver for the boilerplate generator, as a test.
 	$filebase = filter_var($argv[1], FILTER_SANITIZE_STRING);
 
 	require('generate.php');
-	generateBoilerplate($ext, $filebase, $defaultAuthor, $defaultLicense);
+	generateBoilerplate(array(
+		'ext' => $ext,
+		'filebase' => $filebase
+		)
+	);
 }
 ?>

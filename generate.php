@@ -43,7 +43,7 @@ function doSubstitutions($input, $vars) {
 	return $ret;
 }
 
-function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
+function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw*/) {
 
 	$extmapping = array(
 		'cpp'=>'cpp',
@@ -59,14 +59,16 @@ function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 		'h' => 'text/x-chdr'
 	);
 
-	if (!array_key_exists($ext, $extmapping)) {
-		die("Bad value for 'ext'");
+	/*
+	if (!array_key_exists($params['ext'], $extmapping)) {
+		die('Bad value for 'ext'');
 	}
+	*/
 
-	$tpl = $extmapping[$ext];
+	$tpl = $extmapping[$params['ext']];
 	$mimetype = $mimemapping[$tpl];
 
-	$filename = $filebase . "." . $ext;
+	$filename = $params['filebase'] . '.' . $params['ext'];
 
 	// TODO hardcoded hack for prettier templates
 	$headerext = '.h';
@@ -76,6 +78,17 @@ function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 		'YEAR' => $year
 	);
 
+	if (array_key_exists('licenselines', $params)) {
+		$licenseraw = $params['licenselines'];
+	} else {
+		$licenseraw = $defaultLicense;
+	}
+	
+	if (array_key_exists('authorlines', $params)) {
+		$authorinfo = $params['authorlines'];
+	} else {
+		$authorinfo = $defaultAuthor;
+	}
 	$authorlines = doSubstitutions(indentAuthorInfo($authorinfo), $substitutions);
 	$license = doSubstitutions(commentLicense($licenseraw), $substitutions);
 
