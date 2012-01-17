@@ -12,8 +12,7 @@
 
 
 // Internal Includes
-#include "<?php echo $basename; ?>.h"
-
+#include "<?php echo $filebase; echo $headerext; ?>"
 
 // Library/third-party includes
 // - none

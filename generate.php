@@ -2,6 +2,8 @@
 require("external/guid.php");
 require("support/attachment.php");
 
+// TODO don't hardcode this author and license stuff
+
 $defaultAuthor =
 'Ryan Pavlik
 <rpavlik@iastate.edu> and <abiryan@ryand.net>
@@ -62,6 +64,9 @@ function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 	$mimetype = $mimemapping[$tpl];
 
 	$filename = $filebase . "." . $ext;
+
+	// TODO hardcoded hack for prettier templates
+	$headerext = ".h";
 
 	$year = date("Y");
 	$substitutions = array(
