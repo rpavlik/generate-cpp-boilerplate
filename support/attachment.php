@@ -7,11 +7,11 @@
  */
 
 
-/**
+/** @brief Generates headers for downloading an "attachment" that is a
+ * generated file.
  *
- *
- * @param unknown $filename
- * @param unknown $mimetype
+ * @param string $filename The filename you'd like to give the generated file.
+ * @param string $mimetype The mimetype of the generated file.
  */
 function generateAttachment($filename, $mimetype) {
 	header('Content-disposition: attachment; filename="' . $filename . '"');

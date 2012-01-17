@@ -8,11 +8,11 @@
  */
 
 
-/**
+/** @brief Cleans up input that is intended as part of a filename.
  *
  *
- * @param unknown $input
- * @return unknown
+ * @param string $input
+ * @return string cleaned
  */
 function sanitizeFilenamePart($input) {
 	return filter_var($input, FILTER_SANITIZE_STRING);
@@ -23,11 +23,11 @@ function sanitizeFilenamePart($input) {
 }
 
 
-/**
+/** @brief Cleans up other general input
  *
  *
- * @param unknown $input
- * @return unknown
+ * @param string $input
+ * @return string cleaned
  */
 function sanitizeLine($input) {
 	return filter_var($input, FILTER_SANITIZE_STRING);
