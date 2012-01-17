@@ -153,7 +153,7 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 		'LICENSELINES' = $license,
 		'DEF' = $def
 	)
-	echo doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $fields);
+	print(doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $fields));
 }
 
 
