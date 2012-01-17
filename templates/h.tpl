@@ -1,20 +1,17 @@
 /** @file
 	@brief Header
 
-	@date <?php echo $year; ?>
+	@date @YEAR@
 
 	@author
-<?php echo $authorlines; ?>
-
+@AUTHORLINES@
 */
 
-<?php echo $license; ?>
-
+@LICENSELINES@
 
 #pragma once
-#ifndef <?php echo $def; ?>
-
-#define <?php echo $def; ?>
+#ifndef @DEF@
+#define @DEF@
 
 
 // Internal Includes
@@ -26,5 +23,5 @@
 // Standard includes
 // - none
 
-#endif // <?php echo $def; ?>
+#endif // @DEF@
 

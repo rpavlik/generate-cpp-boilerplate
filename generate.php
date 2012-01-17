@@ -147,7 +147,13 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 
 	generateAttachment($filename, $mimetype);
 
-	require 'templates/' . $tpl . '.tpl';
+	$fields = array(
+		'YEAR' = $year,
+		'AUTHORLINES' = $authorlines,
+		'LICENSELINES' = $license,
+		'DEF' = $def
+	)
+	echo doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $fields);
 }
 
 

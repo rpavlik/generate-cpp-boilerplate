@@ -1,18 +1,16 @@
 /** @file
 	@brief Implementation
 
-	@date <?php echo $year; ?>
+	@date @YEAR@
 
 	@author
-<?php echo $authorlines; ?>
-
+@AUTHORLINES@
 */
 
-<?php echo $license; ?>
-
+@LICENSELINES@
 
 // Internal Includes
-#include "<?php echo $filebase; echo $headerext; ?>"
+#include "@FILEBASE@@HEADEREXT@"
 
 // Library/third-party includes
 // - none
