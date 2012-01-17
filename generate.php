@@ -87,6 +87,9 @@ function doSubstitutions($input, $vars) {
 	return $ret;
 }
 
+function array_has_valid_string_for_key($k, $arr) {
+	return array_key_exists($k, $arr) && strlen($arr[$k]) > 0;
+}
 
 /**
  *
@@ -109,11 +112,9 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 		'h' => 'text/x-chdr'
 	);
 
-	/*
-	if (!array_key_exists($params['ext'], $extmapping)) {
-		die('Bad value for 'ext'');
+	if (!array_has_valid_string_for_key($params['ext'], $extmapping)) {
+		die('Bad value for "ext"');
 	}
-	*/
 
 	$tpl = $extmapping[$params['ext']];
 	$mimetype = $mimemapping[$tpl];
@@ -128,13 +129,13 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 		'YEAR' => $year
 	);
 
-	if (array_key_exists('licenselines', $params)) {
+	if (array_has_valid_string_for_key('licenselines', $params)) {
 		$licenseraw = '[LICENSE]' . $params['licenselines'] . '[LICENSE]';
 	} else {
 		$licenseraw = $defaultLicense;
 	}
 
-	if (array_key_exists('authorlines', $params)) {
+	if (array_has_valid_string_for_key('authorlines', $params)) {
 		$authorinfo = $params['authorlines'];
 	} else {
 		$authorinfo = $defaultAuthor;
