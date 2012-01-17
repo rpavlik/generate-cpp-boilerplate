@@ -94,7 +94,7 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 
 	$def = 'INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtr(strtoupper(generateGUID()), '-./', '___');
 
-	#generateAttachment($filename, $mimetype);
+	generateAttachment($filename, $mimetype);
 
 	require('templates/' . $tpl . '.tpl');
 }
