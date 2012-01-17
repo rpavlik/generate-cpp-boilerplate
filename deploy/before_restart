@@ -3,3 +3,6 @@ oldrev, newrev = ARGV
 
 # clean unversioned files
 run "git clean -d -f"
+
+# Remove things not needed in deployment
+run "rm README.mkd test-locally"
