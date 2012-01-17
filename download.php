@@ -5,6 +5,7 @@
  * @package default
  */
 
+error_reporting(E_ALL);
 
 require 'support/sanitize.php';
 require 'generate.php';
