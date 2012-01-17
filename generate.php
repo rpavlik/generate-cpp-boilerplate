@@ -18,18 +18,21 @@ $defaultLicense =
           http://www.boost.org/LICENSE_1_0.txt)';
 
 
+function _indentImpl($line) {
+	return "\t" . trim($line);
+}
+function _commentImpl($line) {
+	return "// " . rtrim($line);
+}
+
 function indentAuthorInfo($authorinfo) {
-	return implode("\n", array_map(
-		function($line) {
-			return "\t" . trim($line);
-		}, explode("\n", $authorinfo)));
+	//return implode("\n", array_map("_indentImpl", explode("\n", $authorinfo)));
+	return $authorinfo;
 }
 
 function commentLicense($licenseraw) {
-	return implode("\n", array_map(
-		function($line) {
-			return "// " . rtrim($line);
-		}, explode("\n", $licenseraw)));
+	//return implode("\n", array_map("_commentImpl", explode("\n", $licenseraw)));
+	return $licenseraw;
 }
 
 function doSubstitutions($input, $vars) {
@@ -78,7 +81,7 @@ function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 
 	$def = "INCLUDED_" . $filebase . "_" . $ext . "_GUID_" . strtr(strtoupper(generateGUID()), "-./", "___");
 
-	generateAttachment($filename, $mimetype);
+	#generateAttachment($filename, $mimetype);
 
 	include("templates/" . $tpl . ".tpl");
 }

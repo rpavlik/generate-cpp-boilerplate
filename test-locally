@@ -10,7 +10,7 @@ This is a command-line driver for the boilerplate generator, as a test.
 	<?php echo $argv[0]; ?> FileBaseName Extension
 <?php
 } else {
-
+	require("support/sanitize.php");
 	$ext = filter_var($argv[2], FILTER_SANITIZE_STRING);
 	$filebase = filter_var($argv[1], FILTER_SANITIZE_STRING);
 

@@ -1,7 +1,16 @@
 <?php
-$ext = filter_var($_GET["ext"], FILTER_SANITIZE_STRING);
-$filebase = filter_var($_GET["filebase"], FILTER_SANITIZE_STRING);
-
+require("support/sanitize.php");
+?>
+OK got to load sanitize
+<?php
 require("generate.php");
+?>
+got to load generate.
+<?php
+$ext = sanitizeFilenamePart($_GET["ext"]);
+$filebase = sanitizeFilenamePart($_GET["filebase"]);
+?> 
+and successfully sanitized.
+<?php
 generateBoilerplate($ext, $filebase, $defaultAuthor, $defaultLicense);
 ?>
