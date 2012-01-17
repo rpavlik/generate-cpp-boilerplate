@@ -14,7 +14,7 @@ This is a command-line driver for the boilerplate generator, as a test.
 	$ext = filter_var($argv[2], FILTER_SANITIZE_STRING);
 	$filebase = filter_var($argv[1], FILTER_SANITIZE_STRING);
 
-	include("generate.php");
+	require("generate.php");
 	generateBoilerplate($ext, $filebase, $defaultAuthor, $defaultLicense);
 }
 ?>
