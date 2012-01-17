@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+oldrev, newrev = ARGV
+
+# clean unversioned files
+run "git clean -d -f"
