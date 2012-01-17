@@ -1,39 +1,80 @@
 <?php
-include("external/guid.php");
-include("support/attachment.php");
+require("external/guid.php");
+require("support/attachment.php");
 
-$extmapping = array(
-	"cpp"=>"cpp",
-	"cxx"=>"cpp",
-	"cc"=>"cpp",
-	"h"=>"h",
-	"hpp"=>"h",
-	"hxx"=>"h"
-)
+$defaultAuthor =
+'Ryan Pavlik
+<rpavlik@iastate.edu> and <abiryan@ryand.net>
+http://academic.cleardefinition.com/
+Iowa State University Virtual Reality Applications Center
+Human-Computer Interaction Graduate Program';
 
-$mimemapping = array(
-	"cpp" = "text/x-c++src",
-	"h" = "text/x-chdr"
-)
+$defaultLicense =
+'          Copyright Iowa State University @YEAR@.
+ Distributed under the Boost Software License, Version 1.0.
+    (See accompanying file LICENSE_1_0.txt or copy at
+          http://www.boost.org/LICENSE_1_0.txt)';
 
 
-$ext = filter_var($_GET["ext"], FILTER_SANITIZE_STRING);
-$filebase = filter_var($_GET["filebase"], FILTER_SANITIZE_STRING);
-
-if (!array_key_exists($extmapping, $ext) {
-	die("Bad value for 'ext'");
+function indentAuthorInfo($authorinfo) {
+	return implode("\n", array_map(
+		function($line) {
+			return "\t" . trim($line);
+		}, explode("\n", $authorinfo)));
 }
 
-$tpl = $extmapping[$ext]
-$mimetype = $mimemapping[$tpl]
+function commentLicense($licenseraw) {
+	return implode("\n", array_map(
+		function($line) {
+			return "// " . rtrim($line);
+		}, explode("\n", $licenseraw)));
+}
 
-$filename = $filebase . "." . $ext;
+function doSubstitutions($input, $vars) {
+	$ret = $input;
+	foreach ($vars as $key=>$val) {
+		$ret = str_replace("@$key@", $val, $ret);
+	}
+	return $ret;
+}
 
-$year = date("Y");
+function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 
-$def = "INCLUDED_" . $filebase . "_" . $ext . "_GUID_" . strtr(strtoupper(generateGUID()), "-./", "___");
+	$extmapping = array(
+		"cpp"=>"cpp",
+		"cxx"=>"cpp",
+		"cc"=>"cpp",
+		"h"=>"h",
+		"hpp"=>"h",
+		"hxx"=>"h"
+	);
 
-generateAttachment($filename, $mimetype);
+	$mimemapping = array(
+		"cpp" => "text/x-c++src",
+		"h" => "text/x-chdr"
+	);
 
-include("templates/" . $tpl . ".tpl")
+	if (!array_key_exists($ext, $extmapping)) {
+		die("Bad value for 'ext'");
+	}
+
+	$tpl = $extmapping[$ext];
+	$mimetype = $mimemapping[$tpl];
+
+	$filename = $filebase . "." . $ext;
+
+	$year = date("Y");
+	$substitutions = array(
+		"YEAR" => $year
+	);
+
+	$authorlines = doSubstitutions(indentAuthorInfo($authorinfo), $substitutions);
+	$license = doSubstitutions(commentLicense($licenseraw), $substitutions);
+
+	$def = "INCLUDED_" . $filebase . "_" . $ext . "_GUID_" . strtr(strtoupper(generateGUID()), "-./", "___");
+
+	generateAttachment($filename, $mimetype);
+
+	include("templates/" . $tpl . ".tpl");
+}
 ?>

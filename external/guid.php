@@ -1,3 +1,4 @@
+<?php
 // Source: http://randomtweak.com/node/54
 // PHP function to generate a Version 4 GUID based on IETF RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace
 
@@ -26,3 +27,4 @@ function generateGUID()
  
 	return $guid;
 }
+?>

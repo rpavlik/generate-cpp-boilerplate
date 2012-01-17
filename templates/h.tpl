@@ -5,13 +5,17 @@
 
 	@author
 <?php echo $authorlines; ?>
+
 */
 
 <?php echo $license; ?>
 
+
 #pragma once
 #ifndef <?php echo $def; ?>
+
 #define <?php echo $def; ?>
+
 
 // Internal Includes
 // - none
@@ -23,6 +27,4 @@
 // - none
 
 #endif // <?php echo $def; ?>
-EOS
-
 

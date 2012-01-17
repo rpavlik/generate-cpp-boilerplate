@@ -5,12 +5,15 @@
 
 	@author
 <?php echo $authorlines; ?>
+
 */
 
 <?php echo $license; ?>
 
+
 // Internal Includes
 #include "<?php echo $basename; ?>.h"
+
 
 // Library/third-party includes
 // - none
