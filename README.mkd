@@ -1,0 +1,51 @@
+Generate C++ Boilerplate
+========================
+
+I turned the shell scripts I habitually use to create new C++ files into
+a simple little PHP web app so my colleagues that aren't always in Linux
+can start the good habit too.
+
+[generate-cpp-boilerplate homepage on GitHub][home]
+
+Original author: [Ryan Pavlik][rp], <rpavlik@iastate.edu> <abiryan@ryand.net>
+
+[home]:https://github.com/rpavlik/generate-cpp-boilerplate
+[rp]:http://academic.cleardefinition.com/ "Ryan Pavlik"
+
+Requirements
+------------
+
+* Needs PHP 5.3 or newer. (uses anonymous functions)
+
+* You may wish to use [git-deploy][] to push to production, though since
+this is such a simple little set of php scripts it may be overkill. I've
+done the `git deploy init` task already, you just need to do the other
+ones listed on the git-deploy page.
+
+[git-deploy]:https://github.com/mislav/git-deploy
+
+Configuration
+-------------
+You'll probably want to fork and tweak things, and that's OK. The files
+in `templates` are one place to start. The main actual templating code
+takes place in `generate.php`.
+
+You can run `./test-locally` if you have the `php` command installed to
+simulate a web hit without needing to set up apache and PHP.
+
+Licenses
+--------
+The full package is free and open-source software. The main code (in the
+root directory, `templates`, and `support`) are subject
+to the following license:
+
+> Copyright Iowa State University 2012.
+>
+> Distributed under the Boost Software License, Version 1.0.
+>
+> (See accompanying file `LICENSE_1_0.txt` or copy at
+> <http://www.boost.org/LICENSE_1_0.txt>)
+
+The GUID generation code in `external/guid.php` is used unmodified from
+<http://randomtweak.com/node/54>
+
