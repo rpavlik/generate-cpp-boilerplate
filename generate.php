@@ -30,36 +30,43 @@ $defaultLicense =
 /**
  *
  *
- * @param unknown $authorinfo
- * @return unknown
+ * @param string $authorinfo
+ * @return string author info indented to match the doxygen header
  */
 function indentAuthorInfo($authorinfo) {
-	return implode("\n", array_map(function ($line) {
-	return "\t" . trim($line);
-}, explode("\n", $authorinfo)));
+	return implode("\n", array_map(
+			function ($line) {
+				return "\t" . trim($line);
+			},
+			explode("\n", $authorinfo)
+		)
+	);
 }
 
 
 /**
  *
  *
- * @param unknown $licenseraw
- * @return unknown
+ * @param string $licenseraw
+ * @return string license with appropriate comment syntax
  */
 function commentLicense($licenseraw) {
 	return implode("\n", array_map(
-		function ($line) {
-			return '// ' . rtrim($line);
-		}, explode("\n", $licenseraw)));
+			function ($line) {
+				return '// ' . rtrim($line);
+			},
+			explode("\n", $licenseraw)
+		)
+	);
 }
 
 
-/**
+/** @brief for each value of KEY, replace @KEY@ in
+ *  the input with $vars["KEY"]
  *
- *
- * @param unknown $input
- * @param unknown $vars
- * @return unknown
+ * @param string $input
+ * @param array $vars
+ * @return string result of replacement
  */
 function doSubstitutions($input, $vars) {
 	$ret = $input;
@@ -69,16 +76,26 @@ function doSubstitutions($input, $vars) {
 	return $ret;
 }
 
+
+/** @brief checks to see if $arr[$k] is a nonempty string
+ *
+ *
+ * @param string $k key
+ * @param array $arr array to search
+ * @return true or false
+ */
 function array_has_valid_string_for_key($k, $arr) {
 	return array_key_exists($k, $arr) && strlen($arr[$k]) > 0;
 }
 
+
 /**
  *
  *
- * @param unknown $params
+ * @param array $params with at least filebase and ext as required keys,
+ * and licenselines and authorlines as optional keys.
  */
-function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw*/) {
+function generateBoilerplate($params) {
 
 	$extmapping = array(
 		'cpp'=>'cpp',
