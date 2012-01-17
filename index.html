@@ -7,12 +7,43 @@
   "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
 
   <title>C++ Boilerplate Generator</title>
+  <script type="text/javascript" src=
+  "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+</script>
+  <script src="ICanHaz.min.js" type="text/javascript">
+</script>
+  <script id="downloadlink" type="text/html">
+<![CDATA[
+    <li><a href="download.php?{{ query_string }}&ext={{ ext }}">Click to download the .{{ ext }} file</a></li>
+  ]]>
+  </script>
+  <script type="text/javascript">
+//<![CDATA[
+      // when the dom's ready
+      $(document).ready(function () {
+        // add a simple click handler for the "add user" button.
+        $('#familyform').submit(function () {
+          var linkdata, linkitem;
+          linkdata = {
+            query_string: $(this).serialize();
+          }
+
+          linkdata["ext"] = "cpp";
+          $('#download_links').append(ich.downloadlink(linkdata));
+
+          linkdata["ext"] = "h";
+          $('#download_links').append(ich.downloadlink(linkdata));
+        });
+      });
+  //]]>
+  </script>
 </head>
 
 <body>
   <h1>C++ Boilerplate Generator</h1>
 
-  <form action="family.php" method="get">
+  <form id="familyform" action="family.php" method="get" name=
+  "familyform">
     <p>Base of filename (no extension):<br />
     <input type="text" name="filebase" /></p>
 
@@ -23,7 +54,9 @@ Ryan Pavlik
 http://academic.cleardefinition.com/
 Iowa State University Virtual Reality Applications Center
 Human-Computer Interaction Graduate Program
-</textarea></p><input type="submit" />
+</textarea></p><input id="createfamily" type="submit" />
   </form>
+
+  <ul id="download_links"></ul>
 </body>
 </html>
