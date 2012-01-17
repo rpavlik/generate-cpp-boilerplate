@@ -26,27 +26,6 @@ $defaultLicense =
           http://www.boost.org/LICENSE_1_0.txt)';
 
 
-/**
- *
- *
- * @param unknown $line
- * @return unknown
- */
-function _indentImpl($line) {
-	return '\t' . trim($line);
-}
-
-
-/**
- *
- *
- * @param unknown $line
- * @return unknown
- */
-function _commentImpl($line) {
-	return '// ' . rtrim($line);
-}
-
 
 /**
  *
@@ -55,8 +34,9 @@ function _commentImpl($line) {
  * @return unknown
  */
 function indentAuthorInfo($authorinfo) {
-	//return implode('\n', array_map('_indentImpl', explode('\n', $authorinfo)));
-	return $authorinfo;
+	return implode("\n", array_map(function ($line) {
+	return "\t" . trim($line);
+}, explode("\n", $authorinfo)));
 }
 
 
@@ -67,8 +47,10 @@ function indentAuthorInfo($authorinfo) {
  * @return unknown
  */
 function commentLicense($licenseraw) {
-	//return implode('\n', array_map('_commentImpl', explode('\n', $licenseraw)));
-	return $licenseraw;
+	return implode("\n", array_map(
+		function ($line) {
+			return '// ' . rtrim($line);
+		}, explode("\n", $licenseraw)));
 }
 
 
@@ -82,7 +64,7 @@ function commentLicense($licenseraw) {
 function doSubstitutions($input, $vars) {
 	$ret = $input;
 	foreach ($vars as $key=>$val) {
-		$ret = str_replace('@$key@', $val, $ret);
+		$ret = str_replace("@$key@", $val, $ret);
 	}
 	return $ret;
 }
@@ -115,11 +97,13 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 	if (!array_has_valid_string_for_key($params['ext'], $extmapping)) {
 		die('Bad value for "ext"');
 	}
+	$ext = $params['ext'];
+	$filebase = $params['filebase'];
 
-	$tpl = $extmapping[$params['ext']];
+	$tpl = $extmapping[$ext];
 	$mimetype = $mimemapping[$tpl];
 
-	$filename = $params['filebase'] . '.' . $params['ext'];
+	$filename = $filebase . '.' . $ext;
 
 	// TODO hardcoded hack for prettier templates
 	$headerext = '.h';
@@ -132,28 +116,27 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 	if (array_has_valid_string_for_key('licenselines', $params)) {
 		$licenseraw = '[LICENSE]' . $params['licenselines'] . '[LICENSE]';
 	} else {
+		global $defaultLicense;
 		$licenseraw = $defaultLicense;
 	}
 
 	if (array_has_valid_string_for_key('authorlines', $params)) {
 		$authorinfo = $params['authorlines'];
 	} else {
+		global $defaultAuthor;
 		$authorinfo = $defaultAuthor;
 	}
-	$authorlines = doSubstitutions(indentAuthorInfo($authorinfo), $substitutions);
-	$license = doSubstitutions(commentLicense($licenseraw), $substitutions);
-
-	$def = 'INCLUDED_' . $params['filebase'] . '_' . $params['ext'] . '_GUID_' . strtr(strtoupper(generateGUID()), '-./', '___');
-
 	generateAttachment($filename, $mimetype);
 
-	$fields = array(
-		'YEAR' = $year,
-		'AUTHORLINES' = $authorlines,
-		'LICENSELINES' = $license,
-		'DEF' = $def
-	)
-	print(doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $fields));
+	$mysubstitutions = array(
+		'YEAR' => $year,
+		'AUTHORLINES' => doSubstitutions(indentAuthorInfo($authorinfo), $substitutions),
+		'LICENSELINES' => doSubstitutions(commentLicense($licenseraw), $substitutions),
+		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
+		'FILEBASE' => $filebase,
+		'HEADEREXT' => $headerext
+	);
+	print(doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $mysubstitutions));
 }
 
 
