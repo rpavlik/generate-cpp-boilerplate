@@ -1,6 +1,6 @@
 <?php
-require("external/guid.php");
-require("support/attachment.php");
+require('external/guid.php');
+require('support/attachment.php');
 
 // TODO don't hardcode this author and license stuff
 
@@ -19,26 +19,26 @@ $defaultLicense =
 
 
 function _indentImpl($line) {
-	return "\t" . trim($line);
+	return '\t' . trim($line);
 }
 function _commentImpl($line) {
-	return "// " . rtrim($line);
+	return '// ' . rtrim($line);
 }
 
 function indentAuthorInfo($authorinfo) {
-	//return implode("\n", array_map("_indentImpl", explode("\n", $authorinfo)));
+	//return implode('\n', array_map('_indentImpl', explode('\n', $authorinfo)));
 	return $authorinfo;
 }
 
 function commentLicense($licenseraw) {
-	//return implode("\n", array_map("_commentImpl", explode("\n", $licenseraw)));
+	//return implode('\n', array_map('_commentImpl', explode('\n', $licenseraw)));
 	return $licenseraw;
 }
 
 function doSubstitutions($input, $vars) {
 	$ret = $input;
 	foreach ($vars as $key=>$val) {
-		$ret = str_replace("@$key@", $val, $ret);
+		$ret = str_replace('@$key@', $val, $ret);
 	}
 	return $ret;
 }
@@ -46,17 +46,17 @@ function doSubstitutions($input, $vars) {
 function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 
 	$extmapping = array(
-		"cpp"=>"cpp",
-		"cxx"=>"cpp",
-		"cc"=>"cpp",
-		"h"=>"h",
-		"hpp"=>"h",
-		"hxx"=>"h"
+		'cpp'=>'cpp',
+		'cxx'=>'cpp',
+		'cc'=>'cpp',
+		'h'=>'h',
+		'hpp'=>'h',
+		'hxx'=>'h'
 	);
 
 	$mimemapping = array(
-		"cpp" => "text/x-c++src",
-		"h" => "text/x-chdr"
+		'cpp' => 'text/x-c++src',
+		'h' => 'text/x-chdr'
 	);
 
 	if (!array_key_exists($ext, $extmapping)) {
@@ -69,20 +69,20 @@ function generateBoilerplate($ext, $filebase, $authorinfo, $licenseraw) {
 	$filename = $filebase . "." . $ext;
 
 	// TODO hardcoded hack for prettier templates
-	$headerext = ".h";
+	$headerext = '.h';
 
-	$year = date("Y");
+	$year = date('Y');
 	$substitutions = array(
-		"YEAR" => $year
+		'YEAR' => $year
 	);
 
 	$authorlines = doSubstitutions(indentAuthorInfo($authorinfo), $substitutions);
 	$license = doSubstitutions(commentLicense($licenseraw), $substitutions);
 
-	$def = "INCLUDED_" . $filebase . "_" . $ext . "_GUID_" . strtr(strtoupper(generateGUID()), "-./", "___");
+	$def = 'INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtr(strtoupper(generateGUID()), '-./', '___');
 
 	#generateAttachment($filename, $mimetype);
 
-	include("templates/" . $tpl . ".tpl");
+	require('templates/' . $tpl . '.tpl');
 }
 ?>

@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-// You probably need a package named something like "php5-cli"
+// You probably need a package named something like 'php5-cli'
 
 if ($argc != 3 || in_array($argv[1], array('--help', '-help', '-h', '-?'))) {
 ?>
@@ -10,11 +10,11 @@ This is a command-line driver for the boilerplate generator, as a test.
 	<?php echo $argv[0]; ?> FileBaseName Extension
 <?php
 } else {
-	require("support/sanitize.php");
+	require('support/sanitize.php');
 	$ext = filter_var($argv[2], FILTER_SANITIZE_STRING);
 	$filebase = filter_var($argv[1], FILTER_SANITIZE_STRING);
 
-	require("generate.php");
+	require('generate.php');
 	generateBoilerplate($ext, $filebase, $defaultAuthor, $defaultLicense);
 }
 ?>
