@@ -92,7 +92,7 @@ function generateBoilerplate($params /*$ext, $filebase, $authorinfo, $licenseraw
 	$authorlines = doSubstitutions(indentAuthorInfo($authorinfo), $substitutions);
 	$license = doSubstitutions(commentLicense($licenseraw), $substitutions);
 
-	$def = 'INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtr(strtoupper(generateGUID()), '-./', '___');
+	$def = 'INCLUDED_' . $params['filebase'] . '_' . $params['ext'] . '_GUID_' . strtr(strtoupper(generateGUID()), '-./', '___');
 
 	generateAttachment($filename, $mimetype);
 
