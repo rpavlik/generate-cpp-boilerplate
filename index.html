@@ -33,6 +33,9 @@
 
           linkdata["ext"] = "h";
           $('#download_links').append(ich.downloadlink(linkdata));
+
+          // Don't actually want to submit the normal way now.
+          return false;
         });
       });
   //]]>
