@@ -9,6 +9,8 @@
 </script>
   <script src="ICanHaz.min.js" type="text/javascript">
 </script>
+  <script src="jquery.cookie.js" type="text/javascript">
+</script>
   <script id="downloadsection" type="text/html">
     <div id="download_panel">
       <h2>Download Links</h2>
@@ -32,6 +34,11 @@
           $('#formsection').fadeIn();
         });
 
+        // Restore cached author info
+        if ($.cookie('authorlines') != null) {
+          $('textarea').val(urldecode($.cookie('authorlines')));
+        }
+
         // add a simple click handler for the "submit" button.
         $('form').submit(function () {
           if ($('input:text').val() === "") {
@@ -46,6 +53,9 @@
           linkdata = {
             query_string: $(this).serialize()
           }
+
+          // Save author info in a cookie.
+          $.cookie('authorlines', urlencode($('textarea').val()), { expires: 365 });
 
           // Empty the output to make way for us.
           $('#download_links').empty();
