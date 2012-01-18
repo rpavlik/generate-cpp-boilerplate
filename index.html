@@ -22,7 +22,7 @@
       // when the dom's ready
       $(document).ready(function () {
         // add a simple click handler for the "add user" button.
-        $('#familyform').submit(function () {
+        $('form').submit(function () {
           var linkdata, linkitem;
           linkdata = {
             query_string: $(this).serialize();
@@ -45,8 +45,7 @@
 <body>
   <h1>C++ Boilerplate Generator</h1>
 
-  <form id="familyform" action="family.php" method="get" name=
-  "familyform">
+  <form action="family.php" method="get">
     <p>Base of filename (no extension):<br />
     <input type="text" name="filebase" /></p>
 
@@ -57,7 +56,7 @@ Ryan Pavlik
 http://academic.cleardefinition.com/
 Iowa State University Virtual Reality Applications Center
 Human-Computer Interaction Graduate Program
-</textarea></p><input id="createfamily" type="submit" />
+</textarea></p><input type="submit" />
   </form>
 
   <ul id="download_links"></ul>
