@@ -9,6 +9,11 @@
 </script>
   <script src="ICanHaz.min.js" type="text/javascript">
 </script>
+  <script id="checkboxsection" type="text/html">
+    <div id="checkbox_panel">
+      <input type="checkbox" checked="true">Use spiffy javascript interface</input>
+    </div>
+  </script>
   <script id="downloadsection" type="text/html">
     <div id="download_panel">
       <h2>Download Links</h2>
@@ -23,6 +28,8 @@
 //<![CDATA[
       // when the dom's ready
       $(document).ready(function () {
+        //$("#container").prepend(ich.checkboxsection({}));
+
         var dlsection;
         dlsection = ich.downloadsection({});
         dlsection.hide();
@@ -42,6 +49,14 @@
             });
             return false;
           }
+          /*
+          alert($('input:checkbox').val());
+          if (! $('input:checkbox').val()) {
+            // do the normal stuff.
+            return true;
+          }
+          */
+
           var linkdata, linkitem;
           linkdata = {
             query_string: $(this).serialize()
