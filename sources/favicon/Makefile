@@ -13,7 +13,7 @@ sizes := 16 32 48
 input := favicon.svg
 output := favicon.ico
 
-png_outputs := $(patsubst %,favicon_%.png,$(large_sizes))
+png_outputs := $(patsubst %,favicon_%.png,$(sizes))
 
 all_output := $(png_outputs) $(output)
 
@@ -22,7 +22,7 @@ all: $(output)
 clean:
 	rm -f $(all_output) $(patsubst %,%.tmp,$(png_outputs))
 
-$(patsubst %,icon_%.png,$(sizes)): icon_%.png : $(input) $(MAKEFILE)
+$(png_outputs): favicon_%.png : $(input) $(MAKEFILE)
 	$(INKSCAPE) --export-width=$* --export-height=$* --export-png=$@.tmp
 	$(PNGCRUSH) $@.tmp $@ && rm $@.tmp
 
