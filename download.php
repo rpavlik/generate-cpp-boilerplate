@@ -12,7 +12,7 @@ require 'support/sanitize.php';
 require 'generate.php';
 generateBoilerplate(array(
 		'ext' => sanitizeFilenamePart($_GET['ext']),
-		'authorlines' => sanitizeLine($_GET['authorlines']),
+		'authorlines' => $_GET['authorlines'],
 		'filebase' => sanitizeFilenamePart($_GET['filebase'])
 	)
 );
