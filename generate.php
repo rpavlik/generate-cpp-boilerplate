@@ -141,7 +141,7 @@ function generateBoilerplate($params) {
 		$authorinfo = $params['authorlines'];
 	} else {
 		global $defaultAuthor;
-		$authorinfo = doSubstitutions($defaultAuthor, array("AUTHORNAME"=>$params["authorname"]));
+		$authorinfo = $defaultAuthor;
 	}
 	generateAttachment($filename, $mimetype);
 
