@@ -14,4 +14,3 @@ $(tocopy): % : sources/favicon/%
 .PHONY: clean
 clean:
 	${MAKE} -C sources/favicon/ clean
-	-rm -f $(tocopy)
