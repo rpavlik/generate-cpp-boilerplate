@@ -9,7 +9,6 @@
 
 @LICENSELINES@
 
-#pragma once
 #ifndef @DEF@
 #define @DEF@
 
