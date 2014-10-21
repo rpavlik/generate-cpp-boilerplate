@@ -99,7 +99,7 @@ function array_has_valid_string_for_key($k, $arr) {
  */
 function generateBoilerplate($params) {
 
-	$extmapping = array(
+	$templatemapping = array(
 		'cpp'=>'cpp',
 		'cxx'=>'cpp',
 		'cc'=>'cpp',
@@ -109,22 +109,32 @@ function generateBoilerplate($params) {
 		'ch'=>'ch' // C-safe header file
 	);
 
+	$extmapping = array(
+		'ch' => 'h'
+	);
+
 	$mimemapping = array(
 		'cpp' => 'text/x-c++src',
 		'h' => 'text/x-chdr'
-		'ch' => 'text/x-chdr'
 	);
 
-	if (!array_has_valid_string_for_key($params['ext'], $extmapping)) {
+	if (array_has_valid_string_for_key($params['ext'], $templatemapping)) {
 		die('Bad value for "ext"');
 	}
 	$ext = $params['ext'];
 	$filebase = $params['filebase'];
 
-	$tpl = $extmapping[$ext];
-	$mimetype = $mimemapping[$tpl];
+	$output_ext = $ext;
+	if (!array_has_valid_string_for_key($ext, $extmapping)) {
+		// This is an "aliased" extension like .ch
+		$output_ext = $extmapping[$ext];
+	}
 
-	$filename = $filebase . '.' . $ext;
+	$tpl = $templatemapping[$ext];
+
+	$mimetype = $mimemapping[$output_ext];
+
+	$filename = $filebase . '.' . $output_ext;
 
 	// TODO hardcoded hack for prettier templates
 	$headerext = '.h';
@@ -153,7 +163,7 @@ function generateBoilerplate($params) {
 		'YEAR' => $year,
 		'AUTHORLINES' => doSubstitutions(indentAuthorInfo($authorinfo), $substitutions),
 		'LICENSELINES' => doSubstitutions(commentLicense($licenseraw), $substitutions),
-		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
+		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $output_ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
 		'FILEBASE' => $filebase,
 		'HEADEREXT' => $headerext
 	);
