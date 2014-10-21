@@ -45,7 +45,7 @@ date_default_timezone_set('America/New_York');
 function indentAuthorInfo($authorinfo) {
 	return implode("\n", array_map(
 			function ($line) {
-				return $indentation . trim($line);
+				return rtrim($indentation . trim($line));
 			},
 			explode("\n", $authorinfo)
 		)
@@ -62,7 +62,7 @@ function indentAuthorInfo($authorinfo) {
 function commentLicense($licenseraw) {
 	return implode("\n", array_map(
 			function ($line) {
-				return '// ' . rtrim($line);
+				return rtrim('// ' . rtrim($line));
 			},
 			explode("\n", $licenseraw)
 		)
