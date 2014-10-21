@@ -1,9 +1,9 @@
 /** @file
-	@brief Header
+    @brief Header
 
-	@date @YEAR@
+    @date @YEAR@
 
-	@author
+    @author
 @AUTHORLINES@
 */
 
