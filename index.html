@@ -72,6 +72,9 @@
           linkdata["ext"] = "h";
           $('#download_links').append(ich.downloadlink(linkdata));
 
+          linkdata["ext"] = "ch";
+          $('#download_links').append(ich.downloadlink(linkdata));
+
           $('#formsection').slideUp();
           $('#download_panel').slideDown();
           // Don't actually want to submit the normal way now.
