@@ -112,12 +112,14 @@ function generateBoilerplate($params) {
 		'cc'=>'cpp',
 		'h'=>'h',
 		'hpp'=>'h',
-		'hxx'=>'h'
+		'hxx'=>'h',
+		'ch'=>'ch' // C-safe header file
 	);
 
 	$mimemapping = array(
 		'cpp' => 'text/x-c++src',
 		'h' => 'text/x-chdr'
+		'ch' => 'text/x-chdr'
 	);
 
 	if (!array_has_valid_string_for_key($params['ext'], $extmapping)) {
