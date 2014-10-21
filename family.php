@@ -23,6 +23,8 @@ function getDownloadLink($ext) {
     <li><?php echo getDownloadLink("cpp"); ?></li>
 
     <li><?php echo getDownloadLink("h"); ?></li>
+
+    <li><?php echo getDownloadLink("ch"); ?></li>
   </ul>
 </body>
 </html>
