@@ -126,7 +126,7 @@ function generateBoilerplate($params) {
 		'h' => 'text/x-chdr'
 	);
 
-	if (!array_has_valid_string_for_key($params['ext'], $templatemapping)) {
+	if (array_has_valid_string_for_key($params['ext'], $templatemapping)) {
 		die('Bad value for "ext"');
 	}
 	$ext = $params['ext'];
