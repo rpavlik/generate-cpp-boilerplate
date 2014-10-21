@@ -132,7 +132,7 @@ function generateBoilerplate($params) {
 	$ext = $params['ext'];
 	$filebase = $params['filebase'];
 
-	$output_ext = $ext
+	$output_ext = $ext;
 	if (!array_has_valid_string_for_key($ext, $extmapping)) {
 		// This is an "aliased" extension like .ch
 		$output_ext = $extmapping[$ext];
