@@ -1,3 +1,5 @@
 /sources/favicon/*.png
 /sources/favicon/*.ico
 /staging/
+/config.php
+/default*.txt
