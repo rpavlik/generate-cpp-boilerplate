@@ -171,7 +171,7 @@ function generateBoilerplate($params) {
 		'YEAR' => $year,
 		'AUTHORLINES' => doSubstitutions(indentAuthorInfo($authorinfo), $substitutions),
 		'LICENSELINES' => doSubstitutions(commentLicense($licenseraw), $substitutions),
-		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
+		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $output_ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
 		'FILEBASE' => $filebase,
 		'HEADEREXT' => $headerext
 	);
