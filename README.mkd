@@ -34,10 +34,12 @@ You can run `./test-locally` if you have the `php` command installed (debian pac
 
 Development and Testing
 -----------------------
-The `Makefile` is not for typical usage, just for development. Targets:
+The `Makefile` is primarily for development, but does have a target to assist with deployment:
 
+- `make` or `make build` - Copies the required files for deployment into `BUILD_DIR`, defined by default as `staging`
 - `make check` - runs PHP in lint mode on the sources
-- `make` - Generates the favicon from SVG source; uses `inkscape`, `pngcrush`, and `icotool` (debian package `icoutils`)
+- `make icon` - Generates the favicon from SVG source; uses `inkscape`, `pngcrush`, and `icotool` (debian package `icoutils`)
+- `make clean` - Removes the staging directory and intermediate files from generating the favicon. (Does not remove the generated files committed to Git.)
 
 Licenses
 --------
