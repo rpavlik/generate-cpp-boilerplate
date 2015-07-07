@@ -30,8 +30,14 @@ You'll probably want to fork and tweak things, and that's OK. The files
 in `templates` are one place to start. The main actual templating code
 takes place in `generate.php`.
 
-You can run `./test-locally` if you have the `php` command installed to
-simulate a web hit without needing to set up apache and PHP.
+You can run `./test-locally` if you have the `php` command installed (debian package `php5-cli`) to simulate a web hit without needing to set up apache and PHP.
+
+Development and Testing
+-----------------------
+The `Makefile` is not for typical usage, just for development. Targets:
+
+- `make check` - runs PHP in lint mode on the sources
+- `make` - Generates the favicon from SVG source; uses `inkscape`, `pngcrush`, and `icotool` (debian package `icoutils`)
 
 Licenses
 --------
@@ -48,4 +54,3 @@ to the following license:
 
 The GUID generation code in `external/guid.php` is used unmodified from
 <http://randomtweak.com/node/54>
-
