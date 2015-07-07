@@ -10,6 +10,7 @@ favicon := favicon_16.png favicon_32.png favicon_48.png favicon.ico
 
 # PHP files we should copy and lint.
 phpfiles := \
+  common.php \
   download.php \
   family.php \
   generate.php \
@@ -20,13 +21,24 @@ phpfiles := \
 # Source template files
 templatefiles := $(wildcard templates/*.tpl)
 
+# Optional flies that may or may not be here.
+optional_files := \
+  config.php \
+  defaultauthor.txt \
+  defaultindentation.txt \
+  defaultlicense.txt
+
+present_optional_files := $(foreach file,$(optional_files),$(wildcard $(file)))
+
 # All files that should be copied to a staging tree.
 build_sources := \
   index.html \
   ICanHaz.min.js \
   $(favicon) \
   $(phpfiles) \
-	$(templatefiles)
+  $(templatefiles) \
+  $(present_optional_files)
+
 
 # Subdirectories we need created in the build directory
 out_dirs := support external templates
