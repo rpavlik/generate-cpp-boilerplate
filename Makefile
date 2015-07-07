@@ -58,6 +58,9 @@ build: $(build_dirs) $(build_files)
 icon: recurse $(favicon)
 
 check: phplint
+	./dotest.sh asdf h
+	./dotest.sh asdf ch
+	./dotest.sh asdf cpp
 
 $(patsubst %,sources/favicon/%,$(favicon)): sources/favicon/% : sources/favicon/favicon.svg sources/favicon/Makefile
 	${MAKE} -C sources/favicon/ $*

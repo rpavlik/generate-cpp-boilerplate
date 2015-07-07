@@ -92,7 +92,7 @@ function generateBoilerplate($params) {
 	$ext = $params['ext'];
 	$type = getTemplateType($ext);
 	if (strlen($type) == 0) {
-			die('Bad value for "ext" - could not look up template type for: ' . $ext);
+			die("Warning: Bad value for 'ext' - could not look up template type for: $ext\n");
 	}
 
 	$output_ext = getExtensionForType($ext);
