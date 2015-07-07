@@ -94,15 +94,14 @@
 
       <form action="family.php" method="get">
         <p>
-        <label for="filebase">Base of filename (no extension):</label><br/>
-        <input type="text" name="filebase" />
+          <label for="filebase">Base of filename (no extension):</label><br/>
+          <input type="text" name="filebase" />
         </p>
 
         <p>
-        <label for="authorlines">Your author information:</label><br/>
-        <textarea name="authorlines" rows="6" cols="60">
-          <?php print(htmlspecialchars($defaults['author'])); ?>
-</textarea></p><input type="submit" />
+          <label for="authorlines">Your author information:</label><br/>
+          <textarea name="authorlines" rows="6" cols="60"><?php print(htmlspecialchars($defaults['author'])); ?></textarea>
+        </p><input type="submit" />
       </form>
     </div>
   </div>
