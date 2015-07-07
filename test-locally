@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 // You probably need a package named something like 'php5-cli'
+require_once('common.php');
 
 if ($argc != 3 || in_array($argv[1], array('--help', '-help', '-h', '-?'))) {
 ?>
