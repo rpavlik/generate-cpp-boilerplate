@@ -79,7 +79,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 phplint:
-	@for fn in $(phpfiles); do \
+	@for fn in $(phpfiles) test-locally; do \
 	  php -l $$fn ;\
 	done
 
