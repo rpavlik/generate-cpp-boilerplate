@@ -28,6 +28,7 @@ function indentAuthorInfo($authorinfo) {
 	global $indentation;
 	return implode("\n", array_map(
 			function ($line) {
+				global $indentation;
 				return rtrim($indentation . trim($line));
 			},
 			explode("\n", $authorinfo)
