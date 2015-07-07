@@ -43,6 +43,7 @@ date_default_timezone_set('America/New_York');
  * @return string author info indented to match the doxygen header
  */
 function indentAuthorInfo($authorinfo) {
+	global $indentation;
 	return implode("\n", array_map(
 			function ($line) {
 				return rtrim($indentation . trim($line));
