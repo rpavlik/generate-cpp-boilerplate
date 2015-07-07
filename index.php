@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?php require_once('common.php') ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>C++ Boilerplate Generator</title>
@@ -101,9 +101,7 @@
         <p>
         <label for="authorlines">Your author information:</label><br/>
         <textarea name="authorlines" rows="6" cols="60">
-Ryan Pavlik
-&lt;ryan@sensics.com&gt;
-&lt;http://sensics.com&gt;
+          <?php print(htmlspecialchars($defaults['author'])); ?>
 </textarea></p><input type="submit" />
       </form>
     </div>

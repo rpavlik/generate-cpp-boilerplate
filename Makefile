@@ -14,6 +14,7 @@ phpfiles := \
   download.php \
   family.php \
   generate.php \
+  index.php \
   support/attachment.php \
   support/sanitize.php \
   external/guid.php
@@ -32,7 +33,6 @@ present_optional_files := $(foreach file,$(optional_files),$(wildcard $(file)))
 
 # All files that should be copied to a staging tree.
 build_sources := \
-  index.html \
   ICanHaz.min.js \
   $(favicon) \
   $(phpfiles) \
