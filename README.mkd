@@ -26,9 +26,14 @@ ones listed on the git-deploy page.
 
 Configuration
 -------------
-You'll probably want to fork and tweak things, and that's OK. The files
-in `templates` are one place to start. The main actual templating code
-takes place in `generate.php`.
+You'll probably want to fork and tweak things, and that's OK.
+
+- There are files that end in `.sample`: rename those to remove that string and edit to customize those details.
+  - There are `.txt` files for the big chunks of text.
+  - For indentation, it's easiest to use the `config.php` instead of a `.txt` file, which is why it looks like there are two ways of configuring indentation.
+- The files in `templates` are one place to start. If you add new templates, you'll have to edit `common.php` to add them to the maps.
+
+The main actual templating code takes place in `generate.php`.
 
 You can run `./test-locally` if you have the `php` command installed (debian package `php5-cli`) to simulate a web hit without needing to set up apache and PHP.
 
