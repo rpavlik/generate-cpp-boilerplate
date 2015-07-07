@@ -25,9 +25,18 @@ limitations under the License.',
 );
 
 foreach ($defaults as $key=>&$val) {
-  $fn = __DIR__ . '/default' . $key . 'txt';
+  $fn = __DIR__ . '/default' . $key . '.txt';
   if (file_exists($fn)) {
-    $val = file_get_contents($fn);
+    $arr = file($fn);
+    if (count($arr) == 0) {
+      continue;
+    }
+    if ($key == 'indentation') {
+      # just take the first line
+      $val = $arr[0];
+    } else {
+      $val = implode("\n", array_map("rtrim", $arr));
+    }
   }
 }
 
