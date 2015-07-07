@@ -6,33 +6,15 @@
  * @see download.php
  */
 
-
+require_once 'common.php';
 require 'external/guid.php';
 require 'support/attachment.php';
 
-// TODO don't hardcode this author and license stuff
+$indentation = $defaults['indentation'];
 
-$indentation = "    ";
+$defaultAuthor = $defaults['author'];
 
-$defaultAuthor =
-	'Ryan Pavlik
-&lt;ryan@sensics.com&gt;
-&lt;http://sensics.com&gt;';
-
-$defaultLicense =
-	'Copyright @YEAR@ Sensics, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-	http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.';
+$defaultLicense = $defaults['license'];
 
 date_default_timezone_set('America/New_York');
 
@@ -106,42 +88,16 @@ function array_has_valid_string_for_key($k, $arr) {
  * and licenselines and authorlines as optional keys.
  */
 function generateBoilerplate($params) {
-
-	$templatemapping = array(
-		'cpp'=>'cpp',
-		'cxx'=>'cpp',
-		'cc'=>'cpp',
-		'h'=>'h',
-		'hpp'=>'h',
-		'hxx'=>'h',
-		'ch'=>'ch' // C-safe header file
-	);
-
-	$extmapping = array(
-		'ch' => 'h'
-	);
-
-	$mimemapping = array(
-		'cpp' => 'text/x-c++src',
-		'h' => 'text/x-chdr'
-	);
-
-	if (array_has_valid_string_for_key($params['ext'], $templatemapping)) {
-		die('Bad value for "ext"');
-	}
 	$ext = $params['ext'];
-	$filebase = $params['filebase'];
-
-	$output_ext = $ext;
-	if (!array_has_valid_string_for_key($ext, $extmapping)) {
-		// This is an "aliased" extension like .ch
-		$output_ext = $extmapping[$ext];
+	$type = getTemplateType($ext);
+	if (strlen($type) == 0) {
+			die('Bad value for "ext" - could not look up template type for: ' . $ext);
 	}
 
-	$tpl = $templatemapping[$ext];
+	$output_ext = getExtensionForType($ext);
+	$mimetype = getMimeForExtension($output_ext);
 
-	$mimetype = $mimemapping[$output_ext];
-
+	$filebase = $params['filebase'];
 	$filename = $filebase . '.' . $output_ext;
 
 	// TODO hardcoded hack for prettier templates
@@ -165,17 +121,18 @@ function generateBoilerplate($params) {
 		global $defaultAuthor;
 		$authorinfo = $defaultAuthor;
 	}
+
 	generateAttachment($filename, $mimetype);
 
 	$mysubstitutions = array(
 		'YEAR' => $year,
 		'AUTHORLINES' => doSubstitutions(indentAuthorInfo($authorinfo), $substitutions),
 		'LICENSELINES' => doSubstitutions(commentLicense($licenseraw), $substitutions),
-		'DEF' => strtr('INCLUDED_' . $filebase . '_' . $output_ext . '_GUID_' . strtoupper(generateGUID()), '-./', '___'),
+		'DEF' => makeCIdentifier('INCLUDED_' . $filebase . '_' . $output_ext . '_GUID_' . strtoupper(generateGUID())) ,
 		'FILEBASE' => $filebase,
 		'HEADEREXT' => $headerext
 	);
-	print(doSubstitutions(file_get_contents('templates/' . $tpl . '.tpl', true), $mysubstitutions));
+	print(doSubstitutions(file_get_contents('templates/' . $type . '.tpl', true), $mysubstitutions));
 }
 
 
