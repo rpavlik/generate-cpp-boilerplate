@@ -7,7 +7,9 @@ can start the good habit too.
 
 [generate-cpp-boilerplate homepage on GitHub][home]
 
-Original author: [Ryan Pavlik][rp], <rpavlik@iastate.edu> <abiryan@ryand.net>
+Related: A PowerShell script (and another script that installs it) for making send-to menu items to generate files using this web app: [Boilerplate Send-To](https://gist.github.com/rpavlik/fbdf1347e52b64b833c5)
+
+Original author: [Ryan Pavlik][rp], <ryan.pavlik@gmail.com> <abiryan@ryand.net>
 
 [home]:https://github.com/rpavlik/generate-cpp-boilerplate
 [rp]:http://academic.cleardefinition.com/ "Ryan Pavlik"
