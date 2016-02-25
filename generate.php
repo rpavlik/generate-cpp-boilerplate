@@ -12,6 +12,8 @@ require 'support/attachment.php';
 
 // TODO don't hardcode this author and license stuff
 
+$indentation = "    ";
+
 $defaultAuthor =
 	'Ryan Pavlik <abiryan@ryand.net>
 http://academic.cleardefinition.com/';
@@ -33,9 +35,10 @@ $defaultLicense =
  * @return string author info indented to match the doxygen header
  */
 function indentAuthorInfo($authorinfo) {
+	global $indentation;
 	return implode("\n", array_map(
 			function ($line) {
-				return "\t" . trim($line);
+				return $indentation . trim($line);
 			},
 			explode("\n", $authorinfo)
 		)
