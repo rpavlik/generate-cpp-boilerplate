@@ -13,14 +13,13 @@ require 'support/attachment.php';
 // TODO don't hardcode this author and license stuff
 
 $defaultAuthor =
-	'Ryan Pavlik
-<rpavlik@iastate.edu> and <abiryan@ryand.net>
-http://academic.cleardefinition.com/
-Iowa State University Virtual Reality Applications Center
-Human-Computer Interaction Graduate Program';
+	'Ryan Pavlik <abiryan@ryand.net>
+http://academic.cleardefinition.com/';
+
+$defaultCopyrightHolder ='Ryan Pavlik';
 
 $defaultLicense =
-	'          Copyright Iowa State University @YEAR@.
+	'          Copyright ' . $defaultCopyrightHolder . ' @YEAR@.
  Distributed under the Boost Software License, Version 1.0.
     (See accompanying file LICENSE_1_0.txt or copy at
           http://www.boost.org/LICENSE_1_0.txt)';
